@@ -1,81 +1,130 @@
-# 📚 RAG Book Assistant
+# 🚀 Intelligent Document Q&A System using RAG (Retrieval-Augmented Generation)
 
-A Retrieval-Augmented Generation (RAG) system that lets you upload any PDF and ask questions about it. Built with LangChain, ChromaDB, MistralAI, and Streamlit.
-
----
-
-## Demo
-
-Upload a PDF → Click "Create Vector Database" → Ask questions → Get grounded answers.
+An advanced **Generative AI application** that enables users to interact with documents using natural language queries.
+This system leverages **Retrieval-Augmented Generation (RAG)** to provide accurate, context-aware answers grounded in uploaded data.
 
 ---
 
-## How It Works
+## 📌 Problem Statement
+
+Large Language Models (LLMs) often produce **hallucinated or outdated responses** because they lack access to real-time or private data.
+
+👉 This project solves that by:
+
+* Retrieving relevant information from documents
+* Feeding it to the LLM
+* Generating **fact-based, context-aware answers**
+
+---
+
+## 🧠 Solution Overview
+
+This project implements a **complete RAG pipeline**:
+
+1. 📂 Document Upload (PDF/Text)
+2. ✂️ Text Chunking
+3. 🔢 Embedding Generation
+4. 🗂️ Vector Database Storage
+5. 🔍 Semantic Retrieval
+6. 🤖 LLM-based Answer Generation
+
+---
+
+## 🏗️ System Architecture
 
 ```
-PDF Upload → Text Chunking → Embeddings (MistralAI) → ChromaDB Vector Store
-                                                              ↓
-                                          User Query → MMR Retrieval → MistralAI LLM → Answer
+User Query
+    ↓
+Query Embedding
+    ↓
+Vector Database (FAISS / Chroma)
+    ↓
+Top-K Relevant Chunks Retrieved
+    ↓
+LLM (with context)
+    ↓
+Final Answer + Sources
 ```
 
-1. **Document Loading** – PDF is loaded and parsed using `PyPDFLoader`
-2. **Chunking** – Text is split into 1000-character chunks with 200-character overlap using `RecursiveCharacterTextSplitter`
-3. **Embeddings** – Each chunk is embedded using MistralAI Embeddings
-4. **Vector Store** – Embeddings stored in ChromaDB for fast similarity search
-5. **Retrieval** – MMR (Maximal Marginal Relevance) retrieval fetches the top-4 relevant, diverse chunks
-6. **Generation** – MistralAI LLM answers strictly based on retrieved context — no hallucinations
+---
+
+## ✨ Key Features
+
+* 📄 Upload and query documents (PDF/Text)
+* 🔍 Semantic search using embeddings
+* 🤖 Context-aware responses using LLMs
+* 📌 Source attribution (retrieved chunks)
+* ⚡ Fast similarity search with vector DB
+* 💬 Interactive Q&A system
 
 ---
 
-## Features
+## 🛠️ Tech Stack
 
-- Upload any PDF and query it in natural language
-- MMR-based retrieval for diverse, relevant context
-- Strict prompt design: model only answers from document context
-- Graceful fallback: responds with *"I could not find the answer in the document"* when the answer isn't present
-- Clean Streamlit UI
+**Languages:**
 
----
+* Python
 
-## Tech Stack
+**Libraries & Frameworks:**
 
-| Layer | Technology |
-|---|---|
-| Frontend | Streamlit |
-| LLM | MistralAI (`mistral-small-2506`) |
-| Embeddings | MistralAI Embeddings |
-| Vector Store | ChromaDB |
-| Framework | LangChain |
-| PDF Parsing | PyPDFLoader |
+* LangChain
+* OpenAI / LLM APIs
+* FAISS / ChromaDB
+* Streamlit (UI)
+
+**Tools:**
+
+* NumPy, Pandas
+* Git & GitHub
 
 ---
 
-## Setup
+## 📸 Demo
 
-### 1. Clone the repository
+> ⚠️ Add your demo here (VERY IMPORTANT)
+
+* Add screenshots OR
+* Upload GIF (recommended)
+
+Example:
+
+```
+![Demo](demo.gif)
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/naitiiik31/RAG_Project.git
 cd RAG_Project
 ```
 
-### 2. Install dependencies
+### 2️⃣ Create Virtual Environment
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate   # Windows
+```
+
+### 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Set up environment variables
+### 4️⃣ Setup Environment Variables
 
-Create a `.env` file in the root directory:
+Create `.env` file:
 
 ```
-MISTRAL_API_KEY=your_mistral_api_key_here
+OPENAI_API_KEY=your_api_key_here
 ```
 
-Get your API key at [console.mistral.ai](https://console.mistral.ai)
-
-### 4. Run the app
+### 5️⃣ Run Application
 
 ```bash
 streamlit run app.py
@@ -83,51 +132,48 @@ streamlit run app.py
 
 ---
 
-## Usage
+## 📊 Example Use Cases
 
-1. Open the app in your browser (default: `http://localhost:8501`)
-2. Upload a PDF using the file uploader
-3. Click **"Create Vector Database"** and wait for processing
-4. Type your question in the text input
-5. Get an answer grounded in your document
-
----
-
-## Project Structure
-
-```
-RAG_Project/
-├── app.py               # Main Streamlit app (upload + query UI)
-├── createDB.py          # Standalone script to pre-build vector DB from a PDF
-├── main.py              # CLI-based query interface
-├── requirements.txt     # Dependencies
-├── .env                 # API keys (not committed)
-├── document loaders/    # Sample PDF documents
-├── vector store/        # Vector store experiments
-└── retriers/            # Retrieval strategy experiments
-```
+* 📚 Ask questions from academic PDFs
+* 📑 Legal & financial document analysis
+* 🧾 Resume/document understanding
+* 🧠 Knowledge base chatbot
 
 ---
 
-## Requirements
+## 🚀 Future Enhancements
 
-```
-langchain
-langchain-community
-langchain-mistralai
-langchain-text-splitters
-chromadb
-streamlit
-pypdf
-python-dotenv
-```
+* 🔄 Conversational memory (chat history)
+* 🔍 Hybrid search (BM25 + embeddings)
+* 🧠 Agentic RAG (self-correcting answers)
+* 🌐 Multi-language support
+* 📊 Evaluation metrics (accuracy, faithfulness)
 
 ---
 
-## Future Improvements
+## 📈 Why This Project Matters
 
-- Support for multiple PDFs simultaneously
-- Chat history / multi-turn conversation
-- Source highlighting (show which page the answer came from)
-- Reranking layer for improved retrieval accuracy
-- Deploy on Streamlit Cloud or HuggingFace Spaces
+* Demonstrates **Generative AI + RAG pipeline**
+* Solves real-world problem of **LLM hallucination**
+* Uses **industry-relevant tools (LangChain, FAISS, LLMs)**
+* Applicable in **chatbots, enterprise search, AI assistants**
+
+---
+
+## 🧑‍💻 Author
+
+**Naitikkumar Patel**
+📧 [patelnaitikkumar05@gmail.com](mailto:patelnaitikkumar05@gmail.com)
+🔗 GitHub: https://github.com/naitiiik31
+
+---
+
+## ⭐ If you found this useful
+
+Give this repo a ⭐ and feel free to contribute!
+
+---
+
+## 📌 Keywords
+
+RAG, LLM, LangChain, FAISS, Generative AI, NLP, Semantic Search, Vector Database, AI Chatbot
