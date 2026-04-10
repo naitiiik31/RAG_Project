@@ -81,10 +81,9 @@ Final Answer + Sources
 
 ## 📸 Demo
 
-> ⚠️ Add your demo here (VERY IMPORTANT)
+<img width="913" height="685" alt="image" src="https://github.com/user-attachments/assets/2f653475-d58d-4b33-a524-fa6d52fbb558" />
+<img width="745" height="815" alt="image" src="https://github.com/user-attachments/assets/c9f87cd0-3dd8-4422-9688-541f6afcfd34" />
 
-* Add screenshots OR
-* Upload GIF (recommended)
 
 Example:
 
